@@ -95,6 +95,10 @@ $ git push -u origin master
             </code></pre>
           </section>
 
+          <section id="basic-usage">
+            <img src="img/basic-usage.png" alt="">
+          </section>
+
           <section id="commits-stage" data-duration="1m">
             <h2>Comprendre le <span lang="en">stage</span></h2>
 
@@ -242,124 +246,32 @@ Switched to a new branch 'topic'
             </code></pre>
           </section>
 
-<!--           <section id="branches-inspection" data-duration="1m30">
-            <h2>Qui contient quoi ?</h2>
-
-            <p>Alors comme ça, le <code>73abc4f</code> est la source du bug, et tu veux savoir où il faudra propager le fix ?</p>
-
-            <pre><code data-trim data-noescape class="no-highlight">
-<span class="blue">(master) $ git branch -a <u>--contains 73abc4f</u></span>
-* <span class="green">master</span>
-  stats
-  <span class="red">origin/master
-  origin/3-2-stable
-  origin/stats</span>
-            </code></pre>
-
-            <p>« Bon, il reste quoi de fusionnable dans <code>master</code> ? »</p>
-
-            <pre><code data-trim data-noescape class="no-highlight">
-<span class="blue">(master) $ git branch -a <u>--no-merged</u></span>
-  stats
-  <span class="red">origin/fix/143
-  origin/fix/148
-  origin/stats
-  origin/max/experiment-web-audio</span>
-            </code></pre>
-          </section> -->
-
           <section id="branches-merge" data-duration="3m">
             <h2>Fusions</h2>
 
             <p>On ne fusionne que pour rappatrier de <strong>façon visible</strong> (bosse dans le graphe) un <strong>périmètre fonctionnel identifié</strong> (bugfix, feature, story, etc.).</p>
 
+            <pre><code data-trim data-noescape class="no-highlight">
+<span class="blue">(master) $ git merge awesome-feature</span>
+            </code></pre>
+
             <p>La branche est un descendant ? Empêchez le fast-forward :</p>
 
             <pre><code data-trim data-noescape class="no-highlight">
-<span class="blue">(master) $ git merge <u>--no-ff</u> fix/143</span>
+<span class="blue">(master) $ git merge <u>--no-ff</u> awesome-feature</span>
             </code></pre>
 
-            <p>On veut un message détaillant les commits fusionnés ?</p>
-
-            <pre><code data-trim data-noescape class="no-highlight">
-<span class="blue">(master) $ git merge <u>--log</u> stats</span>
-            </code></pre>
-
-            <p>Ou pour du systématique :</p>
-
-            <pre><code data-trim data-noescape class="no-highlight">
-<span class="blue">(master) $ git config --global <u>merge.log true</u></span>
-            </code></pre>
+            <p>Ou pas selon les cas...</p>
+            <p>Illusation de la différence au prochain slide !</p>
 
           </section>
 
-          <!-- <section id="branches-dash" data-duration="1m">
-            <h2>Un tiret c’est tout</h2>
+          <section id="branches-merge-no-ff" data-duration="3m">
 
-            <p>Très souvent, quand on <code>merge</code>, <code>rebase</code>, <code>cherry-pick</code> ou simplement <code>checkout</code>, c’est depuis/sur la branche précédente (celle où on était juste avant).</p>
+            <img src="img/merge-ff-vs-no-ff.png" alt="">
 
-            <p class="breathing">Tout comme le <code>cd -</code> du shell, on peut filer <code>-</code> (tiret) comme argument : raccourci récent pour le plus classique <code>@{-1}</code>.</p>
+          </section>
 
-            <pre><code data-trim data-noescape class="no-highlight">
-<span class="blue">(master) $ git rebase master experiment
-(experiment) $ git checkout <u>-</u>
-(master) $</span>
-            </code></pre>
-
-            <pre><code data-trim data-noescape class="no-highlight">
-<span class="blue">(fix/148) $ git checkout 3-2-stable
-(3-2-stable) $ git merge <u>-</u>
-(3-2-stable) $ git checkout master
-(master) $ git cherry-pick <u>-</u>
-(master) $</span>
-            </code></pre>
-          </section> -->
-
-<!--           <section id="branches-too-late" data-duration="1m30s">
-            <h2>Branch-worthy</h2>
-
-            <p>T’aurais juré que ça allait prendre 1 commit et 10 minutes…</p>
-            <p>…et voilà 3 commits et 2 heures que tu y es.  Et c’est pas fini !</p>
-            <p class="breathing"><q>« J’aurais dû faire une branche… »</q></p>
-
-            <pre><code data-trim data-noescape class="no-highlight">
-<span class="blue">  (master) $ git <u>branch</u> fix/158
-  (master) $ git <u>reset</u> --soft <u>HEAD~3</u>
-(master +) $ git <u>checkout</u> fix/158
- (fix/158) $</span>
-            </code></pre>
-
-            <img src="assets/git-branch-worthy.png" class="schema">
-          </section> -->
-
-<!--           <section id="branches-cherry-picking" data-duration="3m">
-            <h2>Cherry-picking</h2>
-
-            <p>Récupérer un commit unique, sans son historique.</p>
-            <p>Parfait pour les fixes et tout ce qu’on trouve dans une branche de release, à réintégrer ailleurs (ex. <code>master</code>).</p>
-
-            <pre><code data-trim data-noescape class="no-highlight">
-<span class="blue">(master) $ git <u>cherry-pick</u> 3-2-stable</span>
-            </code></pre>
-
-            <p>On liste les commits candidats avec <code>git cherry</code> :</p>
-
-            <pre><code data-trim data-noescape class="no-highlight">
-<span class="blue">(master) $ git cherry -v HEAD topic</span>
-<u>+</u> 3abb73d7cc8d8655f8b99816fed56c6030c28551 /img/ -> /images/
-<u>-</u> ba05b8d03de5540181af34a10f1b07debb0ea5fc Stats JS
-<u>+</u> 363f53d53d78384f29dc68d900b04ac0b56d20f6 Nav stats
-            </code></pre>
-
-            <p>Ou avec <code>git log --cherry</code> (je préfère) :</p>
-
-            <pre><code data-trim data-noescape class="no-highlight">
-<span class="blue">(master) $ git lg --cherry HEAD...topic</span>
-<u>*</u> <span class="red">363f53d</span> - (<span class="green">topic</span>) Nav stats <span class="green">(Christophe Porteneuve 1 year, 1 month ago)</span>
-<u>=</u> <span class="red">ba05b8d</span> - Stats JS <span class="green">(Christophe Porteneuve 1 year, 1 month ago)</span>
-<u>*</u> <span class="red">3abb73d</span> - /img/ -> /images/ <span class="green">(Christophe Porteneuve 1 year, 1 month ago)</span>
-            </code></pre>
-          </section> -->
 
           <section id="branches-conflict-method" data-duration="3m">
             <h2>Arbitrer un conflit</h2>
@@ -394,34 +306,6 @@ malgré sa profonde stupidité et la plaie de son usage.
             </code></pre>
           </section>
 
-        <!--   <section id="branches-conflict-show" data-duration="1m">
-            <h2>Voir les snapshots</h2>
-
-            <p>Parfois le diff ne suffit pas, notamment quand le code en conflit fait référence à d’autres parties du code qui ont, elles, bien fusionné, noyant le contexte.</p>
-
-            <p>On peut alors ressortir les snapshots côté récipient :</p>
-
-            <pre><code data-trim data-noescape class="no-highlight">
-<span class="blue">(master *) $ git show <u>:2</u>:intro.md</span>
-<span class="comment"># ou : git show HEAD:intro.md
-# ou : git show master:intro.md</span>
-            </code></pre>
-
-            <p>Côté source du code fusionné :</p>
-
-            <pre><code data-trim data-noescape class="no-highlight">
-<span class="blue">(master *) $ git show <u>:3</u>:intro.md</span>
-<span class="comment"># ou : git show MERGE_HEAD:intro.md
-# ou : git show truth:intro.md</span>
-            </code></pre>
-
-            <p>Dans l’ancêtre commun (avant la divergence) :</p>
-
-            <pre><code data-trim data-noescape class="no-highlight">
-<span class="blue">(master *) $ git show <u>:1</u>:intro.md</span>
-            </code></pre>
-          </section> -->
-
           <section id="branches-merge-abort" data-duration="15s">
             <h2>Lâcher l’affaire ?</h2>
 
@@ -435,9 +319,64 @@ malgré sa profonde stupidité et la plaie de son usage.
             <p>Nettement plus propre et moins dangereux qu’un <code>git reset --hard</code>.  Préserve tes modifs locales pré-fusion.</p>
           </section>
 
+          <section id="branches-merge-vs-rebase" data-duration="45s">
+            <h2>Merge vs Rebase in action</h2>
+            <p>Situation actuelle</p>
+            <img src="img/branch-merge-hotfix.png" alt="">
+            <table style="width: 100%;">
+              <tr>
+                <td>Si on fait un merge...</td>
+                <td>Si on fait un rebase...</td>
+              </tr>
+              <tr>
+                <td><img src="img/branch-merge-feature.png" alt=""></td>
+                <td><img src="img/rebase-feature.png" alt=""></td>
+              </tr>
+            </table>
+          </section>
+
+        <section id="branches-rebase" data-duration="45s">
+          <h2>Rebase</h2>
+
+            <p>Utile pour rappatrier des bugfix, feature, story, etc. (en général le travail d'un autre développeur) au sein de notre branche</p>
+            <p>Prépare à un merge Fast-Forward</p>
+
+            <p>Morale : abusez du rebase mais ne faites qu'un merge final !</p>
+        </section>
+
         </section> <!-- #branches -->
 
         <section data-state="theme-color-forest-yellow">
+
+
+          <section id="pushes-pull-merge" data-duration="1m30">
+            <h2>Pull ≠ Merge !</h2>
+            <h3>C’est vrai, quoi, merde.</h3>
+
+            <p>Par défaut, <code>git pull</code> finit par un <code>merge</code>. C’est <strong><a href="http://www.git-attitude.fr/2014/05/04/bien-utiliser-git-merge-et-rebase/#le-piège de git pull et du réflexe pull + push">super con</a></strong>.</p>
+
+            <p>Quand tu pull, tu ne fusionnes pas une branche tierce chez toi : tu récupères les mises à jour sur ta branche courante.</p>
+
+          </section>
+
+          <section id="pushes-pull-rebase-preserve" data-duration="1m30">
+            <h2>Pull = Rebase</h2>
+
+            <p>Un <code>pull</code> devrait plutôt <strong>rejouer notre taf local sur la branche distante à jour</strong> : par définition, un <code>rebase</code>.</p>
+
+            <pre><code data-trim data-noescape class="no-highlight">
+<span class="blue">$ git pull --rebase origin master</span>
+            </code></pre>
+
+            <p>Il faut juste <a href="http://www.git-attitude.fr/2014/05/04/bien-utiliser-git-merge-et-rebase/#le-cas épineux du pull qui rebase un merge local">faire attention</a> à ne pas <span lang="en">inliner</span> par inadvertance un <code>merge</code> au sein du travail local.</p>
+
+            <p>Une bonne fois pour toutes :</p>
+
+            <pre><code data-trim data-noescape class="no-highlight">
+<span class="blue">$ git config --global <u>pull.rebase preserve</u></span>
+            </code></pre>
+          </section>
+
         <section id="commits-amend" data-duration="2m">
             <h2>Retoucher</h2>
             <h3>le dernier commit</h3>
@@ -553,37 +492,6 @@ $ git rebase -i @{u}
             <p>Raison de plus pour <strong>ne pas faire de pushes trop souvent</strong>. On pond des commits souvent (10–30 &times/j), mais on push plus rarement (2–3 &times/j)</p>
 
             <p>Danger : changer un historique déjà pushé ! A éviter sauf pour squash ces commits avant un merge.</p>
-          </section>
-
-          <section id="pushes-pull-merge" data-duration="1m30">
-            <h2>Pull ≠ Merge !</h2>
-            <h3>C’est vrai, quoi, merde.</h3>
-
-            <p>Par défaut, <code>git pull</code> finit par un <code>merge</code>. C’est <strong><a href="http://www.git-attitude.fr/2014/05/04/bien-utiliser-git-merge-et-rebase/#le-piège de git pull et du réflexe pull + push">super con</a></strong>.</p>
-
-            <p>Quand tu pull, tu ne fusionnes pas une branche tierce chez toi : tu récupères les mises à jour sur ta branche courante.</p>
-
-            <p>En plus, ça pourrit le graphe :</p>
-
-            <img src="assets/git-pull-merge-bleark.png" alt="Un graphe dégueulassé par le pull qui merge">
-          </section>
-
-          <section id="pushes-pull-rebase-preserve" data-duration="1m30">
-            <h2>Pull = Rebase</h2>
-
-            <p>Un <code>pull</code> devrait plutôt <strong>rejouer notre taf local sur la branche distante à jour</strong> : par définition, un <code>rebase</code>.</p>
-
-            <p>Il faut juste <a href="http://www.git-attitude.fr/2014/05/04/bien-utiliser-git-merge-et-rebase/#le-cas épineux du pull qui rebase un merge local">faire attention</a> à ne pas <span lang="en">inliner</span> par inadvertance un <code>merge</code> au sein du travail local.</p>
-
-            <pre><code data-trim data-noescape class="no-highlight">
-<span class="blue">$ git pull --rebase origin master</span>
-            </code></pre>
-
-            <p>Une bonne fois pour toutes :</p>
-
-            <pre><code data-trim data-noescape class="no-highlight">
-<span class="blue">$ git config --global <u>pull.rebase preserve</u></span>
-            </code></pre>
           </section>
         </section>
 
