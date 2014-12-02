@@ -32,7 +32,7 @@
       <div class="slides">
 
         <section>
-          <h2>Initiation à Git</h2>
+          <h2>If you only knew the power of <a href="#">Git</a> !</h2>
           <p>
             <small>Une présentation par <a href="http://twitter.com/spyl94">Aurélien David</a></small>
           </p>
@@ -249,7 +249,10 @@ $ git commit <span class="blue">-m</span> <span class="green">'commit message of
             <h3>=</h3>
             <h3>Code + Issue + Code Comments</h3>
             <p>Idéal pour effectuer une revue de code !</p>
-            <p>+images</p>
+          </section>
+
+          <section id="git-pr-example">
+            <img src="img/pr-example.png" alt="">
           </section>
 
           <section id="github-workflow">
@@ -374,6 +377,20 @@ malgré sa profonde stupidité et la plaie de son usage.
             </code></pre>
           </section>
 
+          <section id="branches-conflictstyle" data-duration="45s">
+            <h2>Résolution</h2>
+
+            <pre><code data-trim data-noescape class="no-highlight">
+<b class="wrong">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+SVN est un outil de gestion de source largement répandu
+et extrêmement pratique.
+=======</b>
+<b class="right">SVN est un outil de gestion de source largement répandu
+malgré sa profonde stupidité et la plaie de son usage.</b>
+<b class="wrong">>>>>>>> truth</b>
+            </code></pre>
+          </section>
+
           <section id="branches-merge-abort" data-duration="15s">
             <h2>Lâcher l’affaire ?</h2>
 
@@ -418,7 +435,6 @@ malgré sa profonde stupidité et la plaie de son usage.
 
           <section id="pushes-pull-merge" data-duration="1m30">
             <h2>Pull ≠ Merge !</h2>
-            <h3>C’est vrai, quoi, merde.</h3>
 
             <p>Par défaut, <code>git pull</code> finit par un <code>merge</code>. C’est <strong><a href="http://www.git-attitude.fr/2014/05/04/bien-utiliser-git-merge-et-rebase/#le-piège de git pull et du réflexe pull + push">super con</a></strong>.</p>
 
@@ -568,14 +584,29 @@ $ git rebase -i @{u}
             <h1>Pro Tips</h1>
           </section>
 
+          <section id="gitignore">
+            <h3>Un fichier pour les ignorer tous !</h3>
+            <p>On a pas envie de polluer le repo avec les librairies, les binaires bien lourds, ou encore d'y stocker notre config.</p>
+            <br>
+            <h3>.gitignore</h3>
+            <pre><code data-trim data-noescape class="no-highlight">
+vendor/
+node_modules/
+app/config/parameter.yml
+            </code></pre>
+            <p>
+              Liste les fichiers laissés intentionnellement <code>untracked</code>.<br><code>/!\</code> Les fichiers déjà ajouté au <code>stage</code> ne sont pas affectés !
+              <a href="https://www.gitignore.io/">gitignore.io</a>
+            </p>
+          </section>
+
           <section id="commits">
             <h1>Des commits atomiques</h1>
           </section>
 
           <section id="commits-why-atomicity">
             <h2>Atomiques pourquoi ?</h2>
-
-            <p>Ne pas mettre n’importe quoi dans vos commits....</p>
+            <p>Ne pas mettre n’importe quoi dans vos commits...</p>
             <p>1 commit = 1 périmètre réduit, d’un coup, ni plus, ni moins.</p>
             <p class="breathing">Pour y arriver, il faut maîtriser <code>add</code> et <code>reset</code>, mais aussi <code>diff</code>, <code>show</code> et bien entendu <code>commit</code>.</p>
           </section>
