@@ -74,33 +74,32 @@
 
           <section id="github-social">
             <h3>Be social !</h3>
-            <img src="img/github-zniehgames.png" alt="">
 
-            <p>Follow me : <a href="https://github.com/spyl94/"> github/spyl94</a> !</p>
+            <p>Suivez moi : <a href="https://github.com/spyl94/">spyl94</a> <3</p>
 
-            <h5>Star your favorite repositories :</h5>
+            <p>Mettez en favoris vos repos préférés :</p>
+
+            <a href="https://github.com/twbs/bootstrap">twbs/bootstrap</a> -
+            <a href="https://github.com/angular/angular.js">angular/angular.js</a> -
+            <a href="https://github.com/mbostock/d3">mbostock/d3</a>
+            <a href="https://github.com/robbyrussell/oh-my-zsh">robbyrussell/oh-my-zsh</a> -
+            <a href="https://github.com/moment/moment">moment/moment</a> -
+            <a href="https://github.com/docker/docker">docker/docker</a>
+            <a href="https://github.com/hakimel/reveal.js">hakimel/reveal.js</a> -
+            <a href="https://github.com/facebook/react">facebook/react</a> -
+            <a href="https://github.com/symfony/symfony">symfony/symfony</a>
+            <a href="https://github.com/google/material-design-icons">google/material-design-icons</a> -
+            <a href="https://github.com/git/git">git/git</a> -
+            <a href="https://github.com/antirez/redis">antirez/redis</a>
 
           </section>
 
 
           <section id="create-repository">
             <h3>Créer un nouveau repo</h3>
+            <h5>Démonstration</h5>
 
-            <h3>Démonstration</h3>
-
-            <pre><code data-trim data-noescape class="no-highlight">
-$ cd formation-git
-
-$ git init
-
-$ git add .
-
-$ git commit -m "first commit"
-
-$ git remote add origin git@github.com:<span class="blue">spyl94/formation-git</span>.git
-
-$ git push -u origin master
-            </code></pre>
+            <p>Besoin d'aide ? <a href="https://help.github.com/articles/create-a-repo/">GitHub vous explique tout !</a></p>
           </section>
 
           <section id="basic-usage">
@@ -109,10 +108,15 @@ $ git push -u origin master
             <p>Jusqu'ici tout est <strong>uniquement</strong> en local !</p>
           </section>
 
+          <section id="file-status-lifecycle">
+            <h3>Le cycle de vie des états des fichiers</h3>
+            <img style="background: white" src="img/file-status-lifecycle.png" alt="">
+          </section>
+
           <section id="status">
-            <h3>La commande la plus utile</h3>
+            <h3>Vérifier l'état des fichiers</h3>
             <p>A lancer systématiquement pour savoir où on en est...</p>
-            <p>git status</p>
+            <p class="breathing"><code>git status</code></p>
           </section>
 
          <section id="commits-stage" data-duration="1m">
@@ -192,14 +196,34 @@ Further paragraphs come after blank lines.
             <pre><code data-trim data-noescape class="no-highlight">
 $ git commit <span class="blue">-m</span> <span class="green">'commit message of a lazy developer'</span>
             </code></pre>
-            <p>Après un commit, le stage est vide.</p>
+            <p>Après un commit, <strong>le stage est vide</strong>.</p>
+          </section>
+
+          <section id="demo" data-duration="30s">
+            <h2>Travailler en local</h2>
+            <p>git status, git add, git diff et git commit en action !</p>
+            <br>
+            <h5>Démonstration</h5>
           </section>
 
           <section id="push" data-duration="30s">
             <h2>Envoyez les commits sur le repo distant</h2>
+            <pre><code data-trim data-noescape class="no-highlight">
+<span class="blue">$ git push origin master</span>
+            </code></pre>
           </section>
 
+          <section id="push" data-duration="30s">
+            <h2>Récupèrer les modifications</h2>
+            <pre><code data-trim data-noescape class="no-highlight">
+<span class="blue">$ git pull origin master</span>
+            </code></pre>
+          </section>
 
+          <section id="push-demo" data-duration="30s">
+            <h3>Collaborer avec Git</h3>
+            <h5>Démonstration</h5>
+          </section>
 </section>
 
 <section data-state="theme-color-silver-green">
@@ -211,9 +235,9 @@ $ git commit <span class="blue">-m</span> <span class="green">'commit message of
           <section id="branches-what">
             <h4>Pourquoi faire ?</h4>
             <p>Les branches sont utilisées pour développer des features isolées les unes des autres.</p>
-            <p>Par défault, la branche principale est 'master' quand vous créez un repository.</p>
+            <p>Par défault, la branche principale est <code>master</code> quand vous créez un repository.</p>
             <h4>Une branche par feature</h4>
-            <p>Travaillez toujours dans une branche différente de master, puis fusionnez vos changements dans la branche principale.</p>
+            <p>Travaillez toujours dans une branche différente de <code>master</code> (ex: <code>add-registration-form</code>, <code>fix-bug-666</code>), puis fusionnez vos changements au sein de la branche principale.</p>
           </section>
 
           <section id="git-pr">
@@ -361,30 +385,30 @@ malgré sa profonde stupidité et la plaie de son usage.
             </code></pre>
           </section>
 
-          <section id="branches-merge-vs-rebase" data-duration="45s">
-            <h2>Merge vs Rebase in action</h2>
-            <p>Situation actuelle</p>
-            <img src="img/branch-merge-hotfix.png" alt="">
-            <table style="width: 100%;">
-              <tr>
-                <td>Si on fait un merge...</td>
-                <td>Si on fait un rebase...</td>
-              </tr>
-              <tr>
-                <td><img src="img/branch-merge-feature.png" alt=""></td>
-                <td><img src="img/rebase-feature.png" alt=""></td>
-              </tr>
-            </table>
-          </section>
-
         <section id="branches-rebase" data-duration="45s">
           <h2>Rebase</h2>
+            <p>Rejoue notre taf local sur la branche distante à jour.</p>
+<pre><code data-trim data-noescape class="no-highlight">
+<span class="blue">(awesome-feature) $ git rebase origin master</span>
+</code></pre>
+            <p>Utile pour rappatrier des bugfix, feature, story, etc. au sein de notre branche !</p>
+        </section>
 
-            <p>Utile pour rappatrier des bugfix, feature, story, etc. (en général le travail d'un autre développeur) au sein de notre branche</p>
-            <p>Prépare à un merge Fast-Forward</p>
-
-            <p>Morale : abusez du rebase mais ne faites qu'un merge final !</p>
-            <p>CATCH FEATURE UP WITH MASTER BY REBASING, THEN MERGE --NO-FF</p>
+        <section id="branches-merge-vs-rebase" data-duration="45s">
+          <h2>Merge vs Rebase in action</h2>
+          <p>Situation initiale</p>
+          <img src="img/branch-merge-hotfix.png" alt="">
+          <table style="width: 100%;">
+            <tr>
+              <td>Si on fait un merge...</td>
+              <td>Si on fait un rebase...</td>
+            </tr>
+            <tr>
+              <td><img src="img/branch-merge-feature.png" alt=""></td>
+              <td><img src="img/rebase-feature.png" alt=""></td>
+            </tr>
+          </table>
+          <p>Abusez du <code>rebase</code> mais ne faites qu'un <code>merge</code> final !</p>
         </section>
 
         </section> <!-- #branches -->
