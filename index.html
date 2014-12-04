@@ -207,14 +207,21 @@ $ git commit <span class="blue">-m</span> <span class="green">'commit message of
           </section>
 
           <section id="push" data-duration="30s">
-            <h2>Envoyez les commits sur le repo distant</h2>
+            <h2>Partager son travail</h2>
+            <p>
+            Lorsque votre vous estimez que votre travail est prêt, il ne reste qu'à envoyez vos commits sur le repo distant : <br>
+            <code>git push [nom-distant] [nom-de-branche]</code> <br>
+            </p>
             <pre><code data-trim data-noescape class="no-highlight">
 <span class="blue">$ git push origin master</span>
             </code></pre>
           </section>
 
           <section id="push" data-duration="30s">
-            <h2>Récupèrer les modifications</h2>
+            <h2>Récupèrer depuis des dépôts distants</h2>
+            <p>
+              <code>git fetch [nom-distant]</code> permet de récupèrer les données à jour du projet, <code>git push [nom-distant] [nom-de-branche]</code> effectue un fetch puis fusionne automatiquement votre travail local avec le distant.
+            </p>
             <pre><code data-trim data-noescape class="no-highlight">
 <span class="blue">$ git pull origin master</span>
             </code></pre>
