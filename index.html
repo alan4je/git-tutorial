@@ -4,10 +4,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title>Initiaion à Git + How we use Git @ Znieh Games • Aurélien David</title>
-
-    <meta name="description" content="Une session à BLEND Web Mix 2014">
-    <meta name="author" content="Christophe Porteneuve">
+    <title>Initiation à Git • Aurélien David</title>
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -35,17 +32,16 @@
       <div class="slides">
 
         <section>
-          <h2>How we use Git</h2>
-          <h3>@ Znieh Games ?</h3>
+          <h2>If you only knew the power of <a href="#">Git</a> !</h2>
           <p>
-            <small>Une présentation de <a href="http://twitter.com/spyl94">Aurélien David</a></small>
+            <small>Une présentation par <a href="http://twitter.com/spyl94">Aurélien David</a></small>
           </p>
         </section>
 
         <section id="whoami">
-          <h2>Git & Github</h2>
-          <h2>Real World</h2>
-          <h2>Pro Tips</h2>
+          <h2><a href="#/git">Git & Github : les bases</a></h2>
+          <h2><a href="#/branches">Les branches</a></h2>
+          <h2><a href="#/pro-tips">Pro Tips</a></h2>
 
           <p>Les slides sont énorméments insipirés par l'excellent :</p>
           <p><a href="http://delicious-insights.com/talks/blend2014-git-protips">Git Protips</a>  de <a href="http://twitter.com/porteneuve">@porteneuve</a></p>
@@ -74,32 +70,56 @@
             <p>
               <a href="https://help.github.com/articles/set-up-git/">Set Up Git</a> - <a href="https://help.github.com/articles/create-a-repo/"> Create a Repo</a> - <a href="https://help.github.com/articles/using-pull-requests/"> Using pull requests</a>
             </p>
-            <p>Follow me : <a href="https://github.com/spyl94/"> github/spyl94</a> !</p>
           </section>
+
+          <section id="github-social">
+            <h3>Be social !</h3>
+
+            <p>Suivez moi : <a href="https://github.com/spyl94/">spyl94</a> <3</p>
+
+            <p>Mettez en favoris vos repos préférés :</p>
+
+            <a href="https://github.com/twbs/bootstrap">twbs/bootstrap</a> -
+            <a href="https://github.com/angular/angular.js">angular/angular.js</a> -
+            <a href="https://github.com/mbostock/d3">mbostock/d3</a>
+            <a href="https://github.com/robbyrussell/oh-my-zsh">robbyrussell/oh-my-zsh</a> -
+            <a href="https://github.com/moment/moment">moment/moment</a> -
+            <a href="https://github.com/docker/docker">docker/docker</a>
+            <a href="https://github.com/hakimel/reveal.js">hakimel/reveal.js</a> -
+            <a href="https://github.com/facebook/react">facebook/react</a> -
+            <a href="https://github.com/symfony/symfony">symfony/symfony</a>
+            <a href="https://github.com/google/material-design-icons">google/material-design-icons</a> -
+            <a href="https://github.com/git/git">git/git</a> -
+            <a href="https://github.com/antirez/redis">antirez/redis</a>
+
+          </section>
+
 
           <section id="create-repository">
             <h3>Créer un nouveau repo</h3>
+            <h5>Démonstration</h5>
 
-            <pre><code data-trim data-noescape class="no-highlight">
-$ cd formation-git
-
-$ git init
-
-$ git add .
-
-$ git commit -m "first commit"
-
-$ git remote add origin git@github.com:<span class="blue">spyl94/formation-git</span>.git
-
-$ git push -u origin master
-            </code></pre>
+            <p>Besoin d'aide ? <a href="https://help.github.com/articles/create-a-repo/">GitHub vous explique tout !</a></p>
           </section>
 
           <section id="basic-usage">
-            <img src="img/basic-usage.png" alt="">
+            <h3>Les 3 niveaux</h3>
+            <img style="background: white" src="img/basic-usage.png" alt="">
+            <p>Jusqu'ici tout est <strong>uniquement</strong> en local !</p>
           </section>
 
-          <section id="commits-stage" data-duration="1m">
+          <section id="file-status-lifecycle">
+            <h3>Le cycle de vie des états des fichiers</h3>
+            <img style="background: white" src="img/file-status-lifecycle.png" alt="">
+          </section>
+
+          <section id="status">
+            <h3>Vérifier l'état des fichiers</h3>
+            <p>A lancer systématiquement pour savoir où on en est...</p>
+            <p class="breathing"><code>git status</code></p>
+          </section>
+
+         <section id="commits-stage" data-duration="1m">
             <h2>Comprendre le <span lang="en">stage</span></h2>
 
             <p>Le <span lang="en">stage</span> ou l’index : ce qui est validé pour partir au commit.</p>
@@ -151,12 +171,12 @@ index 5237399..85e642f 100644
             </code></pre>
           </section>
 
-          <section id="commits-messsage" data-duration="30s">
-            <h2>Ecrivez de bons messages</h2>
-
+           <section id="commit-messages" data-duration="30s">
+            <h2>Commiter, c'est valider le stage</h2>
             <pre><code data-trim data-noescape class="no-highlight">
 <span class="blue">$ git commit</span>
             </code></pre>
+            <p>On ajoute un message pour expliquer les modifications :</p>
 <pre><code data-trim data-noescape class="no-highlight">
 Capitalized, short (50 chars or less) summary
 
@@ -173,26 +193,85 @@ messages generated by commands like git merge and git revert.
 
 Further paragraphs come after blank lines.
 </code></pre>
-<a href="http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html">A Note About Git Commit Messages</a>
+            <pre><code data-trim data-noescape class="no-highlight">
+$ git commit <span class="blue">-m</span> <span class="green">'commit message of a lazy developer'</span>
+            </code></pre>
+            <p>Après un commit, <strong>le stage est vide</strong>.</p>
           </section>
 
+          <section id="demo" data-duration="30s">
+            <h2>Travailler en local</h2>
+            <p>git status, git add, git diff et git commit en action !</p>
+            <br>
+            <h5>Démonstration</h5>
+          </section>
+
+          <section id="push" data-duration="30s">
+            <h2>Partager son travail</h2>
+            <p>
+            Lorsque votre vous estimez que votre travail est prêt, il ne reste qu'à envoyez vos commits sur le repo distant : <br>
+            <code>git push [nom-distant] [nom-de-branche]</code> <br>
+            </p>
+            <pre><code data-trim data-noescape class="no-highlight">
+<span class="blue">$ git push origin master</span>
+            </code></pre>
+          </section>
+
+          <section id="push" data-duration="30s">
+            <h2>Récupèrer depuis des dépôts distants</h2>
+            <p>
+              <code>git fetch [nom-distant]</code> permet de récupèrer les données à jour du projet, <code>git push [nom-distant] [nom-de-branche]</code> effectue un fetch puis fusionne automatiquement votre travail local avec le distant.
+            </p>
+            <pre><code data-trim data-noescape class="no-highlight">
+<span class="blue">$ git pull origin master</span>
+            </code></pre>
+          </section>
+
+          <section id="push-demo" data-duration="30s">
+            <h3>Collaborer avec Git</h3>
+            <h5>Démonstration</h5>
+          </section>
 </section>
 
 <section data-state="theme-color-silver-green">
+
           <section id="branches">
             <h1>Les branches</h1>
           </section>
 
+          <section id="branches-what">
+            <h4>Pourquoi faire ?</h4>
+            <p>Les branches sont utilisées pour développer des features isolées les unes des autres.</p>
+            <p>Par défault, la branche principale est <code>master</code> quand vous créez un repository.</p>
+            <h4>Une branche par feature</h4>
+            <p>Travaillez toujours dans une branche différente de <code>master</code> (ex: <code>add-registration-form</code>, <code>fix-bug-666</code>), puis fusionnez vos changements au sein de la branche principale.</p>
+          </section>
+
           <section id="git-pr">
-            <h3>Pull Request = Code + Issue + Code Comments</h3>
+            <p>Pas si vite la fusion...</p>
+            <br>
+            <h3>Pull Request</h3>
+            <h3>=</h3>
+            <h3>Demande de fusion</h3>
+            <h3>=</h3>
+            <h3>Code + Issue + Code Comments</h3>
+            <p>Idéal pour effectuer une revue de code !</p>
+          </section>
+
+          <section id="git-pr-example">
+            <img src="img/pr-example.png" alt="">
           </section>
 
           <section id="github-workflow">
+            <h2>Workflow #1 : simple</h2>
             <img src="img/github-workflow.jpg" alt="">
+            <p>Ideal pour du déploiment continu</p>
           </section>
 
           <section id="scrum-workflow">
+            <h2>Workflow #2 : scrum</h2>
             <img src="img/workflow-scrum.png" alt="">
+            <p>Facilite le déroulement du sprint</p>
           </section>
 
           <section id="branches-checkout-b" data-duration="45s">
@@ -226,7 +305,7 @@ Switched to a new branch 'topic'
           </section>
 
           <section id="branches-vv-a" data-duration="45s">
-            <h2>Mieux voir les branches</h2>
+            <h2>Lister les branches</h2>
 
             <p>Deux options utiles pour <code>git branch</code> :</p>
             <p><code>-a</code> liste les locales <em>et</em> les distantes</p>
@@ -261,8 +340,7 @@ Switched to a new branch 'topic'
 <span class="blue">(master) $ git merge <u>--no-ff</u> awesome-feature</span>
             </code></pre>
 
-            <p>Ou pas selon les cas...</p>
-            <p>Illusation de la différence au prochain slide !</p>
+            <p>Illustration de la différence au prochain slide !</p>
 
           </section>
 
@@ -306,6 +384,20 @@ malgré sa profonde stupidité et la plaie de son usage.
             </code></pre>
           </section>
 
+          <section id="branches-conflictstyle" data-duration="45s">
+            <h2>Résolution</h2>
+
+            <pre><code data-trim data-noescape class="no-highlight">
+<b class="wrong">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+SVN est un outil de gestion de source largement répandu
+et extrêmement pratique.
+=======</b>
+<b class="right">SVN est un outil de gestion de source largement répandu
+malgré sa profonde stupidité et la plaie de son usage.</b>
+<b class="wrong">>>>>>>> truth</b>
+            </code></pre>
+          </section>
+
           <section id="branches-merge-abort" data-duration="15s">
             <h2>Lâcher l’affaire ?</h2>
 
@@ -315,33 +407,32 @@ malgré sa profonde stupidité et la plaie de son usage.
 <span class="blue">(master *) $ git merge <u>--abort</u></span>
 <span class="blue">(master) $</span>
             </code></pre>
-
-            <p>Nettement plus propre et moins dangereux qu’un <code>git reset --hard</code>.  Préserve tes modifs locales pré-fusion.</p>
-          </section>
-
-          <section id="branches-merge-vs-rebase" data-duration="45s">
-            <h2>Merge vs Rebase in action</h2>
-            <p>Situation actuelle</p>
-            <img src="img/branch-merge-hotfix.png" alt="">
-            <table style="width: 100%;">
-              <tr>
-                <td>Si on fait un merge...</td>
-                <td>Si on fait un rebase...</td>
-              </tr>
-              <tr>
-                <td><img src="img/branch-merge-feature.png" alt=""></td>
-                <td><img src="img/rebase-feature.png" alt=""></td>
-              </tr>
-            </table>
           </section>
 
         <section id="branches-rebase" data-duration="45s">
           <h2>Rebase</h2>
+            <p>Rejoue notre taf local sur la branche distante à jour.</p>
+<pre><code data-trim data-noescape class="no-highlight">
+<span class="blue">(awesome-feature) $ git rebase origin master</span>
+</code></pre>
+            <p>Utile pour rappatrier des bugfix, feature, story, etc. au sein de notre branche !</p>
+        </section>
 
-            <p>Utile pour rappatrier des bugfix, feature, story, etc. (en général le travail d'un autre développeur) au sein de notre branche</p>
-            <p>Prépare à un merge Fast-Forward</p>
-
-            <p>Morale : abusez du rebase mais ne faites qu'un merge final !</p>
+        <section id="branches-merge-vs-rebase" data-duration="45s">
+          <h2>Merge vs Rebase in action</h2>
+          <p>Situation initiale</p>
+          <img src="img/branch-merge-hotfix.png" alt="">
+          <table style="width: 100%;">
+            <tr>
+              <td>Si on fait un merge...</td>
+              <td>Si on fait un rebase...</td>
+            </tr>
+            <tr>
+              <td><img src="img/branch-merge-feature.png" alt=""></td>
+              <td><img src="img/rebase-feature.png" alt=""></td>
+            </tr>
+          </table>
+          <p>Abusez du <code>rebase</code> mais ne faites qu'un <code>merge</code> final !</p>
         </section>
 
         </section> <!-- #branches -->
@@ -351,7 +442,6 @@ malgré sa profonde stupidité et la plaie de son usage.
 
           <section id="pushes-pull-merge" data-duration="1m30">
             <h2>Pull ≠ Merge !</h2>
-            <h3>C’est vrai, quoi, merde.</h3>
 
             <p>Par défaut, <code>git pull</code> finit par un <code>merge</code>. C’est <strong><a href="http://www.git-attitude.fr/2014/05/04/bien-utiliser-git-merge-et-rebase/#le-piège de git pull et du réflexe pull + push">super con</a></strong>.</p>
 
@@ -497,14 +587,33 @@ $ git rebase -i @{u}
 
         <section data-state="theme-color-asphalt-orange">
 
+          <section id="pro-tips">
+            <h1>Pro Tips</h1>
+          </section>
+
+          <section id="gitignore">
+            <h3>Un fichier pour les ignorer tous !</h3>
+            <p>On a pas envie de polluer le repo avec les librairies, les binaires bien lourds, ou encore d'y stocker notre config.</p>
+            <br>
+            <h3>.gitignore</h3>
+            <pre><code data-trim data-noescape class="no-highlight">
+vendor/
+node_modules/
+app/config/parameter.yml
+            </code></pre>
+            <p>
+              Liste les fichiers laissés intentionnellement <code>untracked</code>.<br><code>/!\</code> Les fichiers déjà ajouté au <code>stage</code> ne sont pas affectés !
+              <a href="https://www.gitignore.io/">gitignore.io</a>
+            </p>
+          </section>
+
           <section id="commits">
             <h1>Des commits atomiques</h1>
           </section>
 
           <section id="commits-why-atomicity">
             <h2>Atomiques pourquoi ?</h2>
-
-            <p>Ne pas mettre n’importe quoi dans vos commits....</p>
+            <p>Ne pas mettre n’importe quoi dans vos commits...</p>
             <p>1 commit = 1 périmètre réduit, d’un coup, ni plus, ni moins.</p>
             <p class="breathing">Pour y arriver, il faut maîtriser <code>add</code> et <code>reset</code>, mais aussi <code>diff</code>, <code>show</code> et bien entendu <code>commit</code>.</p>
           </section>
